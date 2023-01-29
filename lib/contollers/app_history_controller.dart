@@ -25,7 +25,7 @@ class AppHistoryController extends ResourceController {
         return AppResponse.ok(message: "История недоступна");
       else {
         historyList.forEach((element) {
-          element.removePropertiesFromBackingMap(["id"]);
+          element.removePropertiesFromBackingMap(["id", "user"]);
         });
       }
       return Response.ok(historyList);
