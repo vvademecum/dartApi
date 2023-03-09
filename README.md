@@ -1,16 +1,55 @@
-# api_app_flutter
+# Flutter API application
+## Создание приложения с использованием API.
 
-A new Flutter project.
+__Цель работы:__
 
-## Getting Started
+Реализовать приложение, функционирующее за счет запросов к разработанному API при помощи пакета Conduit и реализовать функционал: регистрация, авторизация, "RefreshToken", вывод и редактирование данных пользователя, изменение пароля, CRUD действия для сущности "Note" (Заметка), поиск, пагинация, фильтрация, история действий и логическое удаление и восстановление записей.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+__Ход работы:__ 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Авторизация в сервисе с обращением к API, запись `accessToken` и `refreshToken` в `sharedPreferences`:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="250" alt="image" src="https://user-images.githubusercontent.com/59766395/224061516-47bb9265-5757-45b1-84c6-6302cd4c5196.png">
+
+
+Окно авторизации:
+
+<img width="463" alt="image" src="https://user-images.githubusercontent.com/59766395/224062226-e6d284fa-4365-4c2c-94b5-504159f9cdf1.png">
+
+
+Вывод списка заметок пользователя при успешной авторизации в сервисе осуществляется за счет обращения к функции класса `NoteUtils`. Данный класс олбеспечивает осуществление запросов для вывода, удаления, добавления и обновления заметок пользователя:
+
+<img width="254" alt="image" src="https://user-images.githubusercontent.com/59766395/224063795-c053882d-4ffe-46c2-96ab-58f058114820.png">
+
+<img width="378" alt="image" src="https://user-images.githubusercontent.com/59766395/224064323-147a375f-4949-4c7f-a857-a8ee818f17da.png">
+
+
+Главное окно отображает список всех заметок пользователя. Существует возможность отфильтровать удаленные заметки и найти заметки по их заголовку. Каждый элемент списка имеет кнопку логического удаления, при нажатии на элемент происходит переход к странице редактирования выбранного элемента: 
+
+<img width="464" alt="image" src="https://user-images.githubusercontent.com/59766395/224064856-735ecf45-6c68-4cfe-a18d-a1a0cc6da291.png">
+
+
+"Плавающая" кнопка ведет к странице создания новой заметки:
+
+<img width="464" alt="image" src="https://user-images.githubusercontent.com/59766395/224065987-e28116af-1c05-49fa-8277-85decd62155e.png">
+
+
+Класс `UserUtils` предоставлет функции обновления информации профиля и получения информации об авторизированном пользователе:
+
+<img width="402" alt="image" src="https://user-images.githubusercontent.com/59766395/224072149-da94db1c-8eb0-40b1-9146-c9310105e163.png">
+
+
+Экран профиля отображает информацию о пользователе и позволяет отредактировать её. Также содержит кнопку "Выйти" для выхода из аккаунта и перехода к странице авторизации:
+
+<img width="463" alt="image" src="https://user-images.githubusercontent.com/59766395/224074108-231244df-35fa-4ee6-83fb-1f74dbe6c399.png">
+
+
+__Вывод:__
+
+В ходе практической работы было реализовано приложение, функционирующее за счет запросов к разработанному API при помощи пакета Conduit и реализован функционал: регистрация, авторизация, "RefreshToken", вывод и редактирование данных пользователя, изменение пароля, CRUD действия для сущности "Note" (Заметка), поиск, пагинация, фильтрация, история действий и логическое удаление и восстановление записей.
+
+
+
+
+
