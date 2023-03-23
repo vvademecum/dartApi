@@ -1,9 +1,12 @@
 version: '3.1'
 
-# backend : 6100
-# db : 6101
-
 services:
+  api:
+    build: .
+    container_name: api
+    ports: 
+      - "8888:8888"
+
   db:
     container_name: db
     ports:
@@ -20,28 +23,10 @@ services:
       - db_vol:/var/lib/postgresql/data/
     networks:
       - internal_net
-  backend:
-    build: ./
-    container_name: backend
-    ports:
-      - 6100:6100
-    environment:
-      - SECRET_KEY=SECRET_KEY
-      - PORT=6100
-      - DB_USERNAME=admin
-      - DB_PASSWORD=root
-      - DB_HOST=db
-      - DB_PORT=6101
-      - DB_NAME=postgres
-    depends_on:
-      - db
-    networks:
-      - internal_net
-
-  
 
 volumes:
   db_vol: {}
+
 
 networks:
   internal_net:

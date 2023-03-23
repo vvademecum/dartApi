@@ -73,7 +73,7 @@ class AppNoteController extends ResourceController {
       {@Bind.query("search") String? search,
       @Bind.query("offset") int? offset,
       @Bind.query("limit") int? limit,
-      @Bind.query("deleted") bool? deleted}) async {
+      @Bind.query("filter") String? filter}) async {
     try {
       final id = AppUtils.getIdFromHeader(header);
 
@@ -87,7 +87,7 @@ class AppNoteController extends ResourceController {
           ..where((note) => note.user!.id).equalTo(id);
       }
 
-      if (deleted == true)
+      if (filter == 'deleted')
         qNotes.where((note) => note.deleted).equalTo(true);
       else
         qNotes.where((note) => note.deleted).equalTo(false);
@@ -100,16 +100,18 @@ class AppNoteController extends ResourceController {
       }
 
       final List<Note> notesList = await qNotes.fetch();
+      List notesJson = List.empty(growable: true);
 
       if (notesList.isEmpty)
         return AppResponse.ok(message: "Заметки не найдены");
       else {
         notesList.forEach((element) {
           element.removePropertiesFromBackingMap(["user", "id", "deleted"]);
+          notesJson.add(element.backing.contents);
         });
       }
 
-      return Response.ok(notesList);
+      return AppResponse.ok(message: 'Заметки получены', body: notesJson);
     } catch (e) {
       return AppResponse.serverError(e);
     }
